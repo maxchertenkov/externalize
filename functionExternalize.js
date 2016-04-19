@@ -7,12 +7,15 @@
 'use strict'
 
 function externalize(document) {
-	var links = document.querySelectorAll("a")
-	for (var i = 0; i < links.length; i++) {
-		if (links[i].hasAttribute("href")) {
-			if (/^(https?)?\:\/\//igm.test(links[i].getAttribute("href"))) {
-				links[i].setAttribute("target", "_blank")
-				links[i].setAttribute("rel", "external")
+	var links = Array.from(document.querySelectorAll("a"))
+	var areas = Array.from(document.querySelectorAll("area"))
+	var arr = links.concat(areas)
+	for (var i = 0; i < arr.length; i++) {
+		if (arr[i].hasAttribute("href")) {
+			
+			if (/^(https?)?\:\/\//igm.test(arr[i].getAttribute("href"))) {
+				arr[i].setAttribute("target", "_blank")
+				arr[i].setAttribute("rel", "external")
 			}
 		}
 	}
